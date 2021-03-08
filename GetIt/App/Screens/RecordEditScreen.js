@@ -16,11 +16,11 @@ const validationSchema = Yup.object().shape({
   salary: Yup.number().required().min(1).max(10000000).label("Salary"),
 });
 
-const handleSubmit = async (record) => {
+const handleSubmit = async (record, { resetForm }) => {
   const result = await recordsApi.addRecord(record);
   if (!result.ok) return alert("Could not save the record");
   alert("Success");
-  return;
+  resetForm();
 };
 
 function RecordEditScreen() {
