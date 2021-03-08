@@ -1,8 +1,7 @@
 import React from "react";
 
-import MessagesScreen from "./App/Screens/MessagesScreen";
-import ListingEditScreen from "./App/Screens/ListingEditScreen";
+import StackNavigation from "./App/Screens/StackNavigation";
 
 export default function App() {
-  return <MessagesScreen />;
+  return <StackNavigation />;
 }

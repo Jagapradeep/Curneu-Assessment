@@ -7,6 +7,7 @@ import {
   AppFormField as FormField,
   SubmitButton,
 } from "../config/forms";
+import recordsApi from "../api/records";
 import Screen from "../config/Screen";
 
 const validationSchema = Yup.object().shape({
@@ -15,7 +16,14 @@ const validationSchema = Yup.object().shape({
   salary: Yup.number().required().min(1).max(10000000).label("Salary"),
 });
 
-function ListingEditScreen() {
+const handleSubmit = async (record) => {
+  const result = await recordsApi.addRecord(record);
+  if (!result.ok) return alert("Could not save the record");
+  alert("Success");
+  return;
+};
+
+function RecordEditScreen() {
   return (
     <Screen style={styles.container}>
       <Form
@@ -24,7 +32,7 @@ function ListingEditScreen() {
           age: "",
           salary: "",
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormField maxLength={255} name="name" placeholder="Name" />
@@ -51,4 +59,4 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-export default ListingEditScreen;
+export default RecordEditScreen;
